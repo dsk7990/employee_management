@@ -4,7 +4,6 @@ import 'package:employee_management/custom_widgets/ctextfield.dart';
 import 'package:employee_management/features/employee_add/widgets/bottom_buttons.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../../app_colors.dart';
 import '../../../custom_widgets/ctext.dart';
 
@@ -87,6 +86,7 @@ class EmployeeAddScreen extends StatelessWidget {
                     height: 16,
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         flex: 4,
@@ -102,7 +102,9 @@ class EmployeeAddScreen extends StatelessWidget {
                       ),
                       Expanded(
                           flex: 1,
-                          child: Image.asset(AppImages.arrowRightPath)),
+                          child: SizedBox(
+                              height: 30,
+                              child: Image.asset(AppImages.arrowRightPath))),
                       Expanded(
                         flex: 4,
                         child: GestureDetector(
@@ -125,6 +127,9 @@ class EmployeeAddScreen extends StatelessWidget {
             BottomButtons(
               onSavePressed: onSavePressed,
               onCancelPressed: onCancelPressed,
+            ),
+            const SizedBox(
+              height: 8,
             )
           ],
         ),

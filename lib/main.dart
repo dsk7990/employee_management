@@ -1,11 +1,17 @@
 import 'package:employee_management/app_strings.dart';
+import 'package:employee_management/features/employee_add/model/employee_model.dart';
+import 'package:employee_management/services/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import 'app_colors.dart';
 import 'router_generator.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(EmployeeModelAdapter());
+  await DatabaseHelper.instance.database;
   runApp(MyApp());
 }
 

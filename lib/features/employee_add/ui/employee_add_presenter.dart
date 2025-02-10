@@ -174,36 +174,37 @@ class EmployeeAddPresenter extends StatelessWidget {
             CSnackBar().showSnackBar(AppStrings.selectEmpRoleMsg);
           } else if (_fromDateController.text.isEmpty) {
             CSnackBar().showSnackBar(AppStrings.selectStartDateMsg);
-          }else {
-            DateFormat dateFormat = DateFormat('dd MMM, yyyy');
-            DateTime dateStart = dateFormat.parse(_fromDateController.text);
-            DateTime dateEnd = dateFormat.parse(_toDateController.text);
-            bool isValidDate = dateStart.isBefore(dateEnd);
-            if(!isValidDate){
-              CSnackBar().showSnackBar(AppStrings.endDateValidationMsg);
-            }else{
-              if (employeeModel != null) {
-                context.read<EmployeeBloc>().add(EditEmployeeEvent(
-                    id: employeeModel?.id,
-                    empName: _empNameController.text,
-                    empRole: _selectRoleController.text,
-                    empStartDate: _fromDateController.text,
-                    empEndDate: _toDateController.text));
-              } else {
-                context.read<EmployeeBloc>().add(AddEmployeeEvent(
-                    empName: _empNameController.text,
-                    empRole: _selectRoleController.text,
-                    empStartDate: _fromDateController.text.isNotEmpty
-                        ? _fromDateController.text
-                        : '',
-                    empEndDate: _toDateController.text.isNotEmpty
-                        ? _toDateController.text
-                        : ''));
+          } else {
+            if (_toDateController.text.isNotEmpty) {
+              DateFormat dateFormat = DateFormat('dd MMM, yyyy');
+              DateTime dateStart = dateFormat.parse(_fromDateController.text);
+              DateTime dateEnd = dateFormat.parse(_toDateController.text);
+              bool isValidDate = dateStart.isBefore(dateEnd);
+              if (!isValidDate) {
+                CSnackBar().showSnackBar(AppStrings.endDateValidationMsg);
+                return;
               }
             }
+
+            if (employeeModel != null) {
+              context.read<EmployeeBloc>().add(EditEmployeeEvent(
+                  id: employeeModel?.id,
+                  empName: _empNameController.text,
+                  empRole: _selectRoleController.text,
+                  empStartDate: _fromDateController.text,
+                  empEndDate: _toDateController.text));
+            } else {
+              context.read<EmployeeBloc>().add(AddEmployeeEvent(
+                  empName: _empNameController.text,
+                  empRole: _selectRoleController.text,
+                  empStartDate: _fromDateController.text.isNotEmpty
+                      ? _fromDateController.text
+                      : '',
+                  empEndDate: _toDateController.text.isNotEmpty
+                      ? _toDateController.text
+                      : ''));
+            }
           }
-
-
         },
         onCancelPressed: () {
           context.pop();

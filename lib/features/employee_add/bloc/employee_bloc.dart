@@ -10,6 +10,7 @@ import '../../../services/database_helper.dart';
 class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   EmployeeBloc()
       : super(GetEmployeesState(status: EmployeeServiceStatus.initial)) {
+
     on<AddEmployeeEvent>((event, emit) => addEmployee(event, emit, state));
     on<EditEmployeeEvent>((event, emit) => editEmployee(event, emit, state));
     on<DeleteEmployeeEvent>(

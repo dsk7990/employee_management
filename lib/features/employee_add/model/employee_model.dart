@@ -1,9 +1,19 @@
-class EmployeeModel {
+import 'package:hive/hive.dart';
+part 'employee_model.g.dart';
+
+@HiveType(typeId: 0)
+class EmployeeModel extends HiveObject{
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? empName;
+  @HiveField(2)
   String? empRole;
+  @HiveField(3)
   String? empStartDate;
+  @HiveField(4)
   String? empEndDate;
+  @HiveField(5)
   String? empDeleteStatus;
 
   EmployeeModel(
